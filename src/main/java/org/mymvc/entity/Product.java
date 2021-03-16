@@ -1,32 +1,25 @@
 package org.mymvc.entity;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
-@JacksonXmlRootElement(localName = "Product")
 @Entity
 @Table(name = "product")
 public class Product {
-    @Id
-    private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private Double price;
 
     public Product() {
     }
 
-    public Product(Long id, String name, double price) {
-        this.id = id;
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,17 +31,15 @@ public class Product {
         this.price = price;
     }
 
-    @JacksonXmlProperty
-    public Long getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    @JacksonXmlProperty
     public String getName() {
         return name;
     }
 
-    @JacksonXmlProperty
     public double getPrice() {
         return price;
     }
