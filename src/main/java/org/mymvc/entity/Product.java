@@ -1,25 +1,30 @@
 package org.mymvc.entity;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
-@XmlRootElement
+@JacksonXmlRootElement(localName = "Product")
+@Entity
 public class Product {
-    private int id;
+    @Id
+    private Long id;
     private String name;
-    private double price;
+    private Double price;
 
     public Product() {
     }
 
-    public Product(int id, String name, double price) {
+    public Product(Long id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -31,17 +36,17 @@ public class Product {
         this.price = price;
     }
 
-    @XmlAttribute
-    public int getId() {
+    @JacksonXmlProperty
+    public Long getId() {
         return id;
     }
 
-    @XmlAttribute
+    @JacksonXmlProperty
     public String getName() {
         return name;
     }
 
-    @XmlAttribute
+    @JacksonXmlProperty
     public double getPrice() {
         return price;
     }
@@ -53,19 +58,16 @@ public class Product {
 
         Product product = (Product) o;
 
-        if (id != product.id) return false;
-        if (Double.compare(product.price, price) != 0) return false;
-        return Objects.equals(name, product.name);
+        if (!Objects.equals(id, product.id)) return false;
+        if (!Objects.equals(name, product.name)) return false;
+        return Objects.equals(price, product.price);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
     }
 
