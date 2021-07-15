@@ -6,7 +6,6 @@ import org.mymvc.entity.Product;
 import org.mymvc.repo.ProductDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +19,7 @@ public class JsonPath {
     private static Logger logger = LoggerFactory.getLogger(JsonPath.class);
     private static Gson gson = new GsonBuilder().create();
 
-    @Autowired
-    private ProductDao productDao;
+    private ProductDao productDao = new ProductDao();
 
     @GetMapping(value = "/product/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getList(){

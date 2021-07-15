@@ -4,13 +4,11 @@ import org.hibernate.cfg.Configuration;
 import org.mymvc.entity.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
-@Component
 public class ProductDao /*implements Dao<Product>*/ {
 
     private static Logger logger = LoggerFactory.getLogger(ProductDao.class);
